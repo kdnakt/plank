@@ -21,8 +21,7 @@ class TimerScreen extends Component<State> {
   }
 
   _countUp() {
-    let { time } = this.state;
-    if (time > 30) time = 0;
+    const { time } = this.state;
     this.setState({ time: time + 1 });
     console.log(time);
   }

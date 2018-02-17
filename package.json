@@ -9,7 +9,6 @@
   "dependencies": {
     "react": "16.2.0",
     "react-native": "0.52.2",
-    "react-native-background-timer": "^2.0.0",
     "react-native-stopwatch-timer": "0.0.20"
   },
   "devDependencies": {
