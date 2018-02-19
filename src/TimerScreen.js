@@ -16,9 +16,8 @@ class TimerScreen extends Component<State> {
   constructor() {
     super();
     this.state = {
-      timeCount: 1,
+      timeCount: 0,
       stopwatchStart: false,
-      stopwatchReset: false,
     };
     this.toggleStopwatch = this.toggleStopwatch.bind(this);
     this.resetStopwatch = this.resetStopwatch.bind(this);
@@ -29,13 +28,11 @@ class TimerScreen extends Component<State> {
     this.setState({
       timeCount: timeCount + 1
     });
-    console.log(timeCount);
   }
 
   toggleStopwatch() {
     this.setState({
       stopwatchStart: !this.state.stopwatchStart,
-      stopwatchReset: false,
     }, () => {
       if (this.state.stopwatchStart) {
         ReactNativeBgTimer.runBackgroundTimer(
@@ -50,7 +47,9 @@ class TimerScreen extends Component<State> {
   resetStopwatch() {
     this.setState({
       stopwatchStart: false,
-      stopwatchReset: true,
+      timeCount: 0
+    }, () => {
+      ReactNativeBgTimer.stopBackgroundTimer();
     });
   }
 
@@ -65,6 +64,10 @@ class TimerScreen extends Component<State> {
           <Text style={options.text}>
             {!this.state.stopwatchStart ? "Start" : "Stop"}
           </Text>
+        </TouchableHighlight>
+
+        <TouchableHighlight onPress={this.resetStopwatch}>
+          <Text style={options.text}>{"Reset"}</Text>
         </TouchableHighlight>
       </View>
     );
