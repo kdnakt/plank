@@ -53,11 +53,22 @@ class TimerScreen extends Component<State> {
     });
   }
 
+  formatTime() {
+    const { timeCount } = this.state;
+    const seconds = timeCount % 60;
+    const minutes = (timeCount - seconds) / 60;
+    return this.zeroPad(minutes) + ':' + this.zeroPad(seconds);
+  }
+
+  zeroPad(time) {
+    return `${('00' + time).slice(-2)}`;
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-          {'This is TimerScreen: ' + this.state.timeCount}
+          {'This is TimerScreen: ' + this.formatTime()}
         </Text>
 
         <TouchableHighlight onPress={this.toggleStopwatch}>
