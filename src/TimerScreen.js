@@ -72,33 +72,19 @@ class TimerScreen extends Component<State> {
         </Text>
 
         <TouchableHighlight onPress={this.toggleStopwatch}>
-          <Text style={options.text}>
+          <Text style={styles.buttonText}>
             {!this.state.stopwatchStart ? "Start" : "Stop"}
           </Text>
         </TouchableHighlight>
 
         <TouchableHighlight onPress={this.resetStopwatch}>
-          <Text style={options.text}>{"Reset"}</Text>
+          <Text style={styles.buttonText}>{"Reset"}</Text>
         </TouchableHighlight>
       </View>
     );
   }
 
 }
-
-const options = {
-  container: {
-    backgroundColor: '#000',
-    padding: 5,
-    borderRadius: 5,
-    width: 220,
-  },
-  text: {
-    fontSize: 30,
-    color: '#F0F',
-    marginLeft: 7,
-  }
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -109,6 +95,11 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     marginVertical: 8,
+  },
+  buttonText: {
+    fontSize: 30,
+    color: '#F0F',
+    marginLeft: 7,
   },
   icon: {
     width: 100,
