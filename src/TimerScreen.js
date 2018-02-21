@@ -6,16 +6,14 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import ReactNativeBgTimer from 'react-native-background-timer';
+import * as Progress from 'react-native-progress';
 
-type State = {
-  time: null,
-};
-
-class TimerScreen extends Component<State> {
+class TimerScreen extends Component {
 
   constructor() {
     super();
     this.state = {
+      targetTime: 60,
       timeCount: 0,
       stopwatchStart: false,
     };
@@ -24,10 +22,20 @@ class TimerScreen extends Component<State> {
   }
 
   _countUp() {
-    const { timeCount } = this.state;
-    this.setState({
-      timeCount: timeCount + 1
-    });
+    const { timeCount, targetTime, stopwatchStart } = this.state;
+    const newTime = timeCount + 1;
+    const newStart = newTime < targetTime;
+    if (stopwatchStart) {
+      this.setState({
+        timeCount: newTime,
+        stopwatchStart: newStart,
+      }, () => {
+        if (!newStart) {
+          ReactNativeBgTimer.stopBackgroundTimer();
+          alert('Finished');
+        }
+      });
+    }
   }
 
   toggleStopwatch() {
@@ -53,10 +61,9 @@ class TimerScreen extends Component<State> {
     });
   }
 
-  formatTime() {
-    const { timeCount } = this.state;
-    const seconds = timeCount % 60;
-    const minutes = (timeCount - seconds) / 60;
+  formatTime(time) {
+    const seconds = time % 60;
+    const minutes = (time - seconds) / 60;
     return this.zeroPad(minutes) + ':' + this.zeroPad(seconds);
   }
 
@@ -68,7 +75,11 @@ class TimerScreen extends Component<State> {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-          {'This is TimerScreen: ' + this.formatTime()}
+          {'TargetTime is: ' + this.formatTime(this.state.targetTime)}
+        </Text>
+
+        <Text style={styles.text}>
+          {'This is TimerScreen: ' + this.formatTime(this.state.timeCount)}
         </Text>
 
         <TouchableHighlight onPress={this.toggleStopwatch}>
@@ -80,6 +91,11 @@ class TimerScreen extends Component<State> {
         <TouchableHighlight onPress={this.resetStopwatch}>
           <Text style={styles.buttonText}>{"Reset"}</Text>
         </TouchableHighlight>
+
+        <Progress.Pie
+          progress={this.state.timeCount / this.state.targetTime}
+          size={150}
+        />
       </View>
     );
   }
