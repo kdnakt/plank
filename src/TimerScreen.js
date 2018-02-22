@@ -31,10 +31,16 @@ class TimerScreen extends Component {
         stopwatchStart: newStart,
       }, () => {
         if (!newStart) {
-          ReactNativeBgTimer.stopBackgroundTimer();
-          alert('Finished');
+          this.finish(newTime);
         }
       });
+    }
+  }
+
+  finish(time) {
+    ReactNativeBgTimer.stopBackgroundTimer();
+    if (time) {
+      alert(`Finished ${this.formatTime(time)} plank!`);
     }
   }
 
@@ -47,17 +53,18 @@ class TimerScreen extends Component {
           () => this._countUp(),
           1000);
       } else {
-        ReactNativeBgTimer.stopBackgroundTimer();
+        this.finish();
       }
     });
   }
 
   resetStopwatch() {
+    const { timeCount, stopwatchStart } = this.state;
     this.setState({
       stopwatchStart: false,
       timeCount: 0
     }, () => {
-      ReactNativeBgTimer.stopBackgroundTimer();
+      this.finish(stopwatchStart ? timeCount : 0);
     });
   }
 
@@ -89,7 +96,9 @@ class TimerScreen extends Component {
         </TouchableHighlight>
 
         <TouchableHighlight onPress={this.resetStopwatch}>
-          <Text style={styles.buttonText}>{"Reset"}</Text>
+          <Text style={styles.buttonText}>
+            {!this.state.stopwatchStart ? "Reset" : "Stop & Save"}
+          </Text>
         </TouchableHighlight>
 
         <Progress.Pie
