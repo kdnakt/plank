@@ -2,15 +2,22 @@
  * @flow
  */
 
-import React, {
-  Component
-} from 'react';
+import { StackNavigator } from 'react-navigation';
 import TimerScreen from './src/TimerScreen';
 
-export default class App extends Component<{}> {
-  render() {
-    return (
-      <TimerScreen />
-    );
-  }
-}
+const routes = {
+  Timer: {
+    screen: TimerScreen,
+    navigationOptions: {
+      title: 'Plank Timer',
+    },
+  },
+};
+
+const config = {
+  initialRouteName: 'Timer',
+};
+
+const App = StackNavigator(routes, config);
+
+export default App;
