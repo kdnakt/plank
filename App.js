@@ -4,6 +4,7 @@
 
 import { StackNavigator } from 'react-navigation';
 import TimerScreen from './src/TimerScreen';
+import ConfigScreen from './src/ConfigScreen';
 
 const routes = {
   Timer: {
@@ -12,6 +13,9 @@ const routes = {
       title: 'Plank Timer',
     },
   },
+  Config: {
+    screen: ConfigScreen,
+  }
 };
 
 const config = {
