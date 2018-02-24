@@ -81,6 +81,13 @@ class TimerScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Icon.Button
+          name='cog'
+          onPress={() => this.props.navigation.navigate('Config')}
+          size={20}>
+
+        </Icon.Button>
+
         <Text style={styles.text}>
           {'TargetTime is: ' + this.formatTime(this.state.targetTime)}
         </Text>

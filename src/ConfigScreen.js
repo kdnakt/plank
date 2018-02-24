@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 
 class ConfigScreen extends Component {
-  render {
+  render() {
     return (
       <View>
          <Text>{"Configuration"}</Text>  
