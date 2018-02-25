@@ -7,6 +7,8 @@ import {
 } from 'react-native';
 import ReactNativeBgTimer from 'react-native-background-timer';
 import * as Progress from 'react-native-progress';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 class TimerScreen extends Component {
 
