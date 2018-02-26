@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Button,
   Text,
   StyleSheet,
   View,
@@ -7,7 +8,7 @@ import {
 } from 'react-native';
 import ReactNativeBgTimer from 'react-native-background-timer';
 import * as Progress from 'react-native-progress';
-import Icon from 'react-native-vector-icons/FontAwesome';
+//import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 class TimerScreen extends Component {
@@ -83,12 +84,10 @@ class TimerScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Icon.Button
-          name='cog'
+        <Button
           onPress={() => this.props.navigation.navigate('Config')}
-          size={20}>
-
-        </Icon.Button>
+          title="Config*"
+        />
 
         <Text style={styles.text}>
           {'TargetTime is: ' + this.formatTime(this.state.targetTime)}
