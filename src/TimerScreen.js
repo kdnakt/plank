@@ -84,11 +84,6 @@ class TimerScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Button
-          onPress={() => this.props.navigation.navigate('Config')}
-          title="Config*"
-        />
-
         <Text style={styles.text}>
           {'TargetTime is: ' + this.formatTime(this.state.targetTime)}
         </Text>
@@ -137,7 +132,7 @@ const styles = StyleSheet.create({
   icon: {
     width: 100,
     height: 100,
-  }
+  },
 });
 
 export default TimerScreen;
