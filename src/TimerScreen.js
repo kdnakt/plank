@@ -9,7 +9,7 @@ import {
 import ReactNativeBgTimer from 'react-native-background-timer';
 import * as Progress from 'react-native-progress';
 //import Icon from 'react-native-vector-icons/FontAwesome';
-
+import Realm from 'realm';
 
 class TimerScreen extends Component {
 
@@ -22,6 +22,24 @@ class TimerScreen extends Component {
     };
     this.toggleStopwatch = this.toggleStopwatch.bind(this);
     this.resetStopwatch = this.resetStopwatch.bind(this);
+  }
+
+  componentWillMount() {
+    Realm.open({
+      schema: [{
+        name: 'TargetTime',
+        properties: {seconds: 'int'},
+      }],
+    }).then(realm => {
+      const times = realm.objects('TargetTime');
+      if (times.length > 0) {
+        this.setState({targetTime: times[0].seconds});
+      } else {
+        realm.write(() => {
+          realm.create('TargetTime', {seconds: 30});
+        });
+      }
+    });
   }
 
   _countUp() {
