@@ -13,6 +13,18 @@ import Realm from 'realm';
 
 class TimerScreen extends Component {
 
+  static navigationOptions = ({navigation}) => ({
+    title: 'Plank Timer',
+    headerRight: (<TouchableHighlight
+      onPress={() => {
+        navigation.navigate('Config');
+      }}>
+        <Text>
+          {'Config'}
+        </Text>
+      </TouchableHighlight>),
+  });
+
   constructor() {
     super();
     this.state = {
