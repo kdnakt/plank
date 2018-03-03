@@ -8,6 +8,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import Realm from 'realm';
+import InputNumber from 'rmc-input-number';
 
 const keyboardType = Platform.select({
   ios: 'number-pad',
@@ -50,20 +51,43 @@ class ConfigScreen extends Component {
 
   render() {
     return (
-      <View>
-         <Text>{"Configuration"}</Text>
+      <View style={styles.container}>
+         <Text style={styles.text}>
+           {"Configuration"}
+         </Text>
 
-         <TextInput
-           keyboardType={keyboardType}
-           onChangeText={(text) => {
+         <InputNumber
+           min={0}
+           max={300}
+           onChange={(text) => {
              this.save(text);
            }}
-           value={'' + this.state.targetTime}
+           value={this.state.targetTime}
          />
       </View>
     );
   }
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    fontSize: 20,
+    marginVertical: 8,
+  },
+  buttonText: {
+    fontSize: 30,
+    color: '#F0F',
+    marginLeft: 7,
+  },
+  icon: {
+    width: 100,
+    height: 100,
+  },
+});
 
 export default ConfigScreen;
