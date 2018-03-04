@@ -63,6 +63,7 @@ class ConfigScreen extends Component {
              this.save(text);
            }}
            value={this.state.targetTime}
+           styles={styles}
          />
       </View>
     );
