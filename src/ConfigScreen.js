@@ -62,7 +62,7 @@ class ConfigScreen extends Component {
            onChange={(text) => {
              this.save(text);
            }}
-           value={this.state.targetTime}
+           defaultValue={this.state.targetTime}
            styles={styles}
          />
       </View>
