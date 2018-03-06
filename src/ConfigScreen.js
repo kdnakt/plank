@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Platform,
   Text,
   TextInput,
   StyleSheet,
@@ -9,11 +8,7 @@ import {
 } from 'react-native';
 import Realm from 'realm';
 import InputNumber from 'rmc-input-number';
-
-const keyboardType = Platform.select({
-  ios: 'number-pad',
-  android: 'numeric',
-});
+import InputNumberStyles from './InputNumberStyles';
 
 class ConfigScreen extends Component {
 
@@ -63,7 +58,8 @@ class ConfigScreen extends Component {
              this.save(text);
            }}
            defaultValue={this.state.targetTime}
-           styles={styles}
+           styles={InputNumberStyles}
+           style={{ width: 100 }}
          />
       </View>
     );
