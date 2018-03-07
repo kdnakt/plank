@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import Realm from 'realm';
 import InputNumber from 'rmc-input-number';
-import InputNumberStyles from './InputNumberStyles';
+import InputNumberStyles from 'rmc-input-number/lib/styles';
 
 class ConfigScreen extends Component {
 
