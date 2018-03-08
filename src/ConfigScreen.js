@@ -42,6 +42,9 @@ class ConfigScreen extends Component {
     realm.write(() => {
       realm.create('TargetTime', {seconds: text}, true);
     });
+    this.setState({
+      targetTime: text,
+    })
   }
 
   render() {
@@ -57,7 +60,7 @@ class ConfigScreen extends Component {
            onChange={(text) => {
              this.save(text);
            }}
-           defaultValue={this.state.targetTime}
+           value={this.state.targetTime}
            styles={InputNumberStyles}
            style={{ width: 100 }}
          />
