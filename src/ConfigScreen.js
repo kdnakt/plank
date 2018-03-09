@@ -40,7 +40,10 @@ class ConfigScreen extends Component {
   save(text) {
     const realm = this.state.realm;
     realm.write(() => {
-      realm.create('TargetTime', {seconds: text}, true);
+      realm.create('TargetTime', {
+        id: 'TargetTime',
+        seconds: text,
+      }, true);
     });
     this.setState({
       targetTime: text,

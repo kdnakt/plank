@@ -40,7 +40,11 @@ class TimerScreen extends Component {
     Realm.open({
       schema: [{
         name: 'TargetTime',
-        properties: {seconds: 'int'},
+        primaryKey: 'id',
+        properties: {
+          id: 'string',
+          seconds: 'int',
+        },
       }],
     }).then(realm => {
       const times = realm.objects('TargetTime');
@@ -48,7 +52,10 @@ class TimerScreen extends Component {
         this.setState({targetTime: times[0].seconds});
       } else {
         realm.write(() => {
-          realm.create('TargetTime', {seconds: 30});
+          realm.create('TargetTime', {
+            id: 'TargetTime',
+            seconds: 30,
+          });
         });
       }
     });
