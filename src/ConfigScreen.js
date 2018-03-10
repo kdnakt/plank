@@ -61,7 +61,7 @@ class ConfigScreen extends Component {
            }}
            value={this.state.targetTime}
            styles={InputNumberStyles}
-           style={{ width: 100 }}
+           style={{ width: 150 }}
          />
       </View>
     );
