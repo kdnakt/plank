@@ -9,6 +9,7 @@ import {
 import Realm from 'realm';
 import InputNumber from 'rmc-input-number';
 import InputNumberStyles from 'rmc-input-number/lib/styles';
+import TargetTime from './schema/TargetTime';
 
 class ConfigScreen extends Component {
 
@@ -21,12 +22,7 @@ class ConfigScreen extends Component {
   }
 
   componentWillMount() {
-    Realm.open({
-      schema: [{
-        name: 'TargetTime',
-        properties: {seconds: 'int'},
-      }],
-    }).then(realm => {
+    Realm.open(TargetTime).then(realm => {
       const times = realm.objects('TargetTime');
       if (times.length > 0) {
         this.setState({

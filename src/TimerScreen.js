@@ -10,6 +10,7 @@ import ReactNativeBgTimer from 'react-native-background-timer';
 import * as Progress from 'react-native-progress';
 //import Icon from 'react-native-vector-icons/FontAwesome';
 import Realm from 'realm';
+import TargetTime from './schema/TargetTime';
 
 class TimerScreen extends Component {
 
@@ -37,25 +38,7 @@ class TimerScreen extends Component {
   }
 
   componentWillMount() {
-    Realm.open({
-      schema: [{
-        name: 'TargetTime',
-        primaryKey: 'id',
-        properties: {
-          id: 'string',
-          seconds: 'int',
-        },
-      }],
-      schemaVersion: 2,
-      migration: (oldR, newR) => {
-        const oldObjects = oldR.objects('TargetTime');
-        const newObjects = newR.objects('TargetTime');
-
-        for (let i = 0; i < oldObjects.length; i++) {
-          newObjects[i].id = 'TargetTime' + i;
-        }
-      },
-    }).then(realm => {
+    Realm.open(TargetTime).then(realm => {
       const times = realm.objects('TargetTime');
       if (times.length > 0) {
         this.setState({targetTime: times[0].seconds});
