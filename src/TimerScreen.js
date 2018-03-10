@@ -46,6 +46,15 @@ class TimerScreen extends Component {
           seconds: 'int',
         },
       }],
+      schemaVersion: 2,
+      migration: (oldR, newR) => {
+        const oldObjects = oldR.objects('TargetTime');
+        const newObjects = newR.objects('TargetTime');
+
+        for (let i = 0; i < oldObjects.length; i++) {
+          newObjects[i].id = 'TargetTime' + i;
+        }
+      },
     }).then(realm => {
       const times = realm.objects('TargetTime');
       if (times.length > 0) {
