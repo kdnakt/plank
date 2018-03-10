@@ -41,7 +41,10 @@ class TimerScreen extends Component {
     Realm.open(TargetTime).then(realm => {
       const times = realm.objects('TargetTime');
       if (times.length > 0) {
-        this.setState({targetTime: times[0].seconds});
+        this.setState({
+          targetTime: times[0].seconds,
+          realm: realm,
+        });
       } else {
         realm.write(() => {
           realm.create('TargetTime', {
@@ -50,6 +53,9 @@ class TimerScreen extends Component {
           });
         });
       }
+    });
+    this.props.navigation.addListener('willFocus', () => {
+      this.forceUpdate();
     });
   }
 
@@ -111,10 +117,13 @@ class TimerScreen extends Component {
   }
 
   render() {
+    const targetTime = this.state.realm ?
+      this.state.realm.objects('TargetTime')[0].seconds
+      : this.state.targetTime;
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-          {'TargetTime is: ' + this.formatTime(this.state.targetTime)}
+          {'TargetTime is: ' + this.formatTime(targetTime)}
         </Text>
 
         <Text style={styles.text}>
