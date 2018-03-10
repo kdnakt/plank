@@ -11,6 +11,7 @@ import * as Progress from 'react-native-progress';
 //import Icon from 'react-native-vector-icons/FontAwesome';
 import Realm from 'realm';
 import TargetTime from './schema/TargetTime';
+import { formatTime } from './util/Utils';
 
 class TimerScreen extends Component {
 
@@ -106,16 +107,6 @@ class TimerScreen extends Component {
     });
   }
 
-  formatTime(time) {
-    const seconds = time % 60;
-    const minutes = (time - seconds) / 60;
-    return this.zeroPad(minutes) + ':' + this.zeroPad(seconds);
-  }
-
-  zeroPad(time) {
-    return `${('00' + time).slice(-2)}`;
-  }
-
   render() {
     const targetTime = this.state.realm ?
       this.state.realm.objects('TargetTime')[0].seconds
@@ -123,11 +114,11 @@ class TimerScreen extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-          {'TargetTime is: ' + this.formatTime(targetTime)}
+          {'TargetTime is: ' + formatTime(targetTime)}
         </Text>
 
         <Text style={styles.text}>
-          {'This is TimerScreen: ' + this.formatTime(this.state.timeCount)}
+          {'This is TimerScreen: ' + formatTime(this.state.timeCount)}
         </Text>
 
         <TouchableHighlight onPress={this.toggleStopwatch}>
