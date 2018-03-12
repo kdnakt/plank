@@ -1,5 +1,11 @@
 // @flow
 
+function formatDate(date) {
+  return date.getYear() + '/'
+      + zeroPad(date.getMonth() + 1)
+      + zeroPad(date.getDate());
+}
+
 function formatTime(time) {
   const seconds = time % 60;
   const minutes = (time - seconds) / 60;
@@ -11,4 +17,7 @@ function zeroPad(time) {
 }
 
 
-export { formatTime };
+export {
+  formatDate,
+  formatTime,
+};

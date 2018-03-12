@@ -11,7 +11,11 @@ import * as Progress from 'react-native-progress';
 //import Icon from 'react-native-vector-icons/FontAwesome';
 import Realm from 'realm';
 import TargetTime from './schema/TargetTime';
-import { formatTime } from './util/Utils';
+import PlankLog from './schema/PlankLog';
+import {
+  formatTime,
+  formatDate,
+} from './util/Utils';
 
 class TimerScreen extends Component {
 
@@ -40,7 +44,7 @@ class TimerScreen extends Component {
 
   componentWillMount() {
     Realm.open(TargetTime).then(realm => {
-      const times = realm.objects('TargetTime');
+      const times = realm.objects(TargetTime.name);
       if (times.length > 0) {
         this.setState({
           targetTime: times[0].seconds,
@@ -48,8 +52,8 @@ class TimerScreen extends Component {
         });
       } else {
         realm.write(() => {
-          realm.create('TargetTime', {
-            id: 'TargetTime',
+          realm.create(TargetTime.name, {
+            id: TargetTime.name,
             seconds: 30,
           });
         });
@@ -79,6 +83,17 @@ class TimerScreen extends Component {
   finish(time) {
     ReactNativeBgTimer.stopBackgroundTimer();
     if (time) {
+      Realm.open(PlankLog).then(realm => {
+        realm.write(() => {
+          const date = new Date();
+          realm.create(PlankLog.name, {
+            id: date.getTime(),
+            date: formatDate(date),
+            seconds: time,
+          });
+          console.log(realm.objects(PlankLog.name));
+        });
+      });
       alert(`Finished ${this.formatTime(time)} plank!`);
     }
   }
