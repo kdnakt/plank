@@ -94,7 +94,7 @@ class TimerScreen extends Component {
           console.log(realm.objects(PlankLog.name));
         });
       });
-      alert(`Finished ${this.formatTime(time)} plank!`);
+      alert(`Finished ${formatTime(time)} plank!`);
     }
   }
 
