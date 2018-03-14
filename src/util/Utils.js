@@ -1,8 +1,8 @@
 // @flow
 
 function formatDate(date) {
-  return date.getYear() + '/'
-      + zeroPad(date.getMonth() + 1)
+  return date.getFullYear() + '/'
+      + zeroPad(date.getMonth() + 1) + '/'
       + zeroPad(date.getDate());
 }
 
