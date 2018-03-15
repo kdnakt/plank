@@ -10,8 +10,11 @@ import ReactNativeBgTimer from 'react-native-background-timer';
 import * as Progress from 'react-native-progress';
 //import Icon from 'react-native-vector-icons/FontAwesome';
 import Realm from 'realm';
-import TargetTime from './schema/TargetTime';
-import PlankLog from './schema/PlankLog';
+import {
+  TargetTime,
+  PlankLog,
+  Schema
+} from './schema/Schema';
 import {
   formatTime,
   formatDate,
@@ -43,7 +46,7 @@ class TimerScreen extends Component {
   }
 
   componentWillMount() {
-    Realm.open(TargetTime).then(realm => {
+    Realm.open(Schema).then(realm => {
       const times = realm.objects(TargetTime.name);
       if (times.length > 0) {
         this.setState({
@@ -83,7 +86,7 @@ class TimerScreen extends Component {
   finish(time) {
     ReactNativeBgTimer.stopBackgroundTimer();
     if (time) {
-      Realm.open(PlankLog).then(realm => {
+      Realm.open(Schema).then(realm => {
         realm.write(() => {
           const date = new Date();
           realm.create(PlankLog.name, {
