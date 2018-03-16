@@ -63,8 +63,16 @@ class TimerScreen extends Component {
       }
     });
     this.props.navigation.addListener('willFocus', () => {
-      this.forceUpdate();
+      this.updateTargetTime();
     });
+  }
+
+  updateTargetTime() {
+    if (this.state.realm) {
+      this.setState({
+        targetTime: this.state.realm.objects('TargetTime')[0].seconds,
+      });
+    }
   }
 
   _countUp() {
@@ -126,9 +134,7 @@ class TimerScreen extends Component {
   }
 
   render() {
-    const targetTime = this.state.realm ?
-      this.state.realm.objects('TargetTime')[0].seconds
-      : this.state.targetTime;
+    const { targetTime, timeCount } = this.state;
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
@@ -152,7 +158,7 @@ class TimerScreen extends Component {
         </TouchableHighlight>
 
         <Progress.Pie
-          progress={this.state.timeCount / this.state.targetTime}
+          progress={timeCount / targetTime}
           size={150}
         />
       </View>
