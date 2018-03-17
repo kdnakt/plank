@@ -15,6 +15,7 @@ import {
   PlankLog,
   Schema
 } from './schema/Schema';
+import Styles from './util/Styles';
 import {
   formatTime,
   formatDate,
@@ -136,23 +137,23 @@ class TimerScreen extends Component {
   render() {
     const { targetTime, timeCount } = this.state;
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}>
+      <View style={Styles.container}>
+        <Text style={Styles.text}>
           {'TargetTime is: ' + formatTime(targetTime)}
         </Text>
 
-        <Text style={styles.text}>
+        <Text style={Styles.text}>
           {'This is TimerScreen: ' + formatTime(this.state.timeCount)}
         </Text>
 
         <TouchableHighlight onPress={this.toggleStopwatch}>
-          <Text style={styles.buttonText}>
+          <Text style={Styles.buttonText}>
             {!this.state.stopwatchStart ? "Start" : "Stop"}
           </Text>
         </TouchableHighlight>
 
         <TouchableHighlight onPress={this.resetStopwatch}>
-          <Text style={styles.buttonText}>
+          <Text style={Styles.buttonText}>
             {!this.state.stopwatchStart ? "Reset" : "Stop & Save"}
           </Text>
         </TouchableHighlight>
@@ -166,26 +167,5 @@ class TimerScreen extends Component {
   }
 
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontSize: 20,
-    marginVertical: 8,
-  },
-  buttonText: {
-    fontSize: 30,
-    color: '#F0F',
-    marginLeft: 7,
-  },
-  icon: {
-    width: 100,
-    height: 100,
-  },
-});
 
 export default TimerScreen;
