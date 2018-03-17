@@ -13,6 +13,7 @@ import {
   TargetTime,
   Schema,
 } from './schema/Schema';
+import Styles from './util/Styles';
 
 class ConfigScreen extends Component {
 
@@ -51,8 +52,8 @@ class ConfigScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-         <Text style={styles.text}>
+      <View style={Styles.container}>
+         <Text style={Styles.text}>
            {"Configuration"}
          </Text>
 
@@ -70,26 +71,5 @@ class ConfigScreen extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontSize: 20,
-    marginVertical: 8,
-  },
-  buttonText: {
-    fontSize: 30,
-    color: '#F0F',
-    marginLeft: 7,
-  },
-  icon: {
-    width: 100,
-    height: 100,
-  },
-});
 
 export default ConfigScreen;
