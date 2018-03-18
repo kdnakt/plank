@@ -25,6 +25,15 @@ class TimerScreen extends Component {
 
   static navigationOptions = ({navigation}) => ({
     title: 'Plank Timer',
+    headerLeft: (<TouchableHighlight
+      onPress={() => {
+        navigation.navigate('Log');
+      }}>
+        <Text style={Styles.text}>
+          {'Log'}
+        </Text>
+      </TouchableHighlight>
+    ),
     headerRight: (<TouchableHighlight
       onPress={() => {
         navigation.navigate('Config');
