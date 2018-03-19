@@ -155,7 +155,9 @@ class TimerScreen extends Component {
           {'This is TimerScreen: ' + formatTime(this.state.timeCount)}
         </Text>
 
-        <TouchableHighlight onPress={this.toggleStopwatch}>
+        <TouchableHighlight onPress={this.toggleStopwatch}
+         disabled={targetTime <= timeCount}
+        >
           <Text style={Styles.buttonText}>
             {!this.state.stopwatchStart ? "Start" : "Stop"}
           </Text>
