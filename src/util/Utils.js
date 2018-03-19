@@ -6,6 +6,13 @@ function formatDate(date) {
       + zeroPad(date.getDate());
 }
 
+function formatDateTime(date) {
+  return formatDate(date) + ' '
+      + zeroPad(date.getHours()) + ':'
+      + zeroPad(date.getMinutes()) + ':'
+      + zeroPad(date.getSeconds());
+}
+
 function formatTime(time) {
   const seconds = time % 60;
   const minutes = (time - seconds) / 60;
@@ -19,5 +26,6 @@ function zeroPad(time) {
 
 export {
   formatDate,
+  formatDateTime,
   formatTime,
 };
