@@ -42,6 +42,7 @@ class LogScreen extends Component {
     return (
       <FlatList
         data={this.state.logs}
+        keyExtractor={item => item.id.toString()}
         renderItem={({ item }) => {
           const d = new Date(item.id);
           return (
