@@ -33,7 +33,7 @@ class LogScreen extends Component {
     Realm.open(Schema).then(realm => {
       const logs = realm.objects(PlankLog.name);
       this.setState({
-        logs: logs,
+        logs: logs.sorted(PlankLog.primaryKey, true),
       });
     })
   }
