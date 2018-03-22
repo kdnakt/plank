@@ -74,6 +74,7 @@ class TimerScreen extends Component {
     });
     this.props.navigation.addListener('willFocus', () => {
       this.updateTargetTime();
+      this.resetStopwatch();
     });
   }
 
