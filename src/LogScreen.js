@@ -20,6 +20,8 @@ import {
 } from './util/Utils';
 import Styles from './util/Styles';
 
+const LOG_COUNT = 7;
+
 class LogScreen extends Component {
 
   static navigationOptions = ({navigation}) => ({
@@ -31,6 +33,8 @@ class LogScreen extends Component {
     this.state = {
       startDate: formatDate(new Date()),
     };
+    this.showNewerLog = this.showNewerLog.bind(this);
+    this.showOlderLog = this.showOlderLog.bind(this);
   }
 
   componentWillMount() {
@@ -38,14 +42,30 @@ class LogScreen extends Component {
       const logs = realm.objects(PlankLog.name);
       this.setState({
         logs: logs.sorted(PlankLog.primaryKey, true),
+        index: 0,
       });
     })
   }
 
+  showNewerLog() {
+    this.showLog(- LOG_COUNT);
+  }
+
+  showOlderLog() {
+    this.showLog(LOG_COUNT);
+  }
+
+  showLog(count) {
+    this.setState({
+      index: this.state.index + count,
+    });
+  }
+
   renderLogs() {
-    return (
+    const index = this.state.index;
+    return (<View>
       <FlatList
-        data={this.state.logs}
+        data={this.state.logs.slice(index, index + LOG_COUNT)}
         keyExtractor={item => item.id.toString()}
         renderItem={({ item }) => {
           const d = new Date(item.id);
@@ -56,7 +76,26 @@ class LogScreen extends Component {
           );
         }}
       />
-    );
+
+      <View style={Styles.row}>
+        <TouchableHighlight
+          disabled={false}
+          onPress={this.showNewerLog}
+        >
+          <Text style={Styles.buttonText}>
+            {"◀︎"}
+          </Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+          disabled={false}
+          onPress={this.showOlderLog}
+        >
+          <Text style={Styles.buttonText}>
+            {"▶︎"}
+          </Text>
+        </TouchableHighlight>
+      </View>
+    </View>);
   }
 
   render() {

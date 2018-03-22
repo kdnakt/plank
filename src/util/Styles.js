@@ -23,6 +23,11 @@ const Styles = StyleSheet.create({
     width: 100,
     height: 100,
   },
+  row: {
+    flex: 0.5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  }
 });
 
 export default Styles;
