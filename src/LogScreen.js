@@ -30,7 +30,7 @@ class LogScreen extends Component {
     super();
     this.state = {
       startDate: formatDate(new Date()),
-    }
+    };
   }
 
   componentWillMount() {
