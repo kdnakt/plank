@@ -22,6 +22,10 @@ import Styles from './util/Styles';
 
 class LogScreen extends Component {
 
+  static navigationOptions = ({navigation}) => ({
+    title: 'Plank Log',
+  });
+
   constructor() {
     super();
     this.state = {

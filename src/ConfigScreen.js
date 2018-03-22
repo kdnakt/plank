@@ -17,6 +17,10 @@ import Styles from './util/Styles';
 
 class ConfigScreen extends Component {
 
+  static navigationOptions = ({navigation}) => ({
+    title: 'Configuration',
+  });
+
   constructor() {
     super();
     this.state = {
@@ -53,10 +57,6 @@ class ConfigScreen extends Component {
   render() {
     return (
       <View style={Styles.container}>
-         <Text style={Styles.text}>
-           {"Configuration"}
-         </Text>
-
          <InputNumber
            min={0}
            max={300}
