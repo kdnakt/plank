@@ -79,7 +79,7 @@ class LogScreen extends Component {
 
       <View style={Styles.row}>
         <TouchableHighlight
-          disabled={false}
+          disabled={index <= 0}
           onPress={this.showNewerLog}
         >
           <Text style={Styles.buttonText}>
@@ -87,7 +87,7 @@ class LogScreen extends Component {
           </Text>
         </TouchableHighlight>
         <TouchableHighlight
-          disabled={false}
+          disabled={this.state.logs.length <= index + LOG_COUNT}
           onPress={this.showOlderLog}
         >
           <Text style={Styles.buttonText}>
