@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import {
+  Button,
   FlatList,
   Text,
   TextInput,
@@ -61,29 +62,29 @@ class LogScreen extends Component {
     });
   }
 
+  renderLogToolBar() {
+    const index = this.state.index;
+    return (
+      <View style={Styles.row}>
+        <Button
+          disabled={index <= 0}
+          onPress={this.showNewerLog}
+          title={"◀︎"}
+        />
+        <Button
+          disabled={this.state.logs.length <= index + LOG_COUNT}
+          onPress={this.showOlderLog}
+          title={"▶︎"}
+        />
+      </View>
+    );
+  }
+
   renderLogs() {
     const index = this.state.index;
     return (<View>
-      <View style={Styles.row}>
-        <TouchableHighlight
-          disabled={index <= 0}
-          onPress={this.showNewerLog}
-        >
-          <Text style={Styles.text}>
-            {"◀︎"}
-          </Text>
-        </TouchableHighlight>
-        <TouchableHighlight
-          disabled={this.state.logs.length <= index + LOG_COUNT}
-          onPress={this.showOlderLog}
-        >
-          <Text style={Styles.text}>
-            {"▶︎"}
-          </Text>
-        </TouchableHighlight>
-      </View>
-
       <FlatList
+        ListHeaderComponent={this.renderLogToolBar()}
         data={this.state.logs.slice(index, index + LOG_COUNT)}
         keyExtractor={item => item.id.toString()}
         renderItem={({ item }) => {
@@ -100,7 +101,7 @@ class LogScreen extends Component {
 
   render() {
     return (
-      <View style={Styles.container}>
+      <View>
         {this.state.logs ?
           this.renderLogs() :
           <Text style={Styles.text}>
