@@ -64,6 +64,25 @@ class LogScreen extends Component {
   renderLogs() {
     const index = this.state.index;
     return (<View>
+      <View style={Styles.row}>
+        <TouchableHighlight
+          disabled={index <= 0}
+          onPress={this.showNewerLog}
+        >
+          <Text style={Styles.text}>
+            {"◀︎"}
+          </Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+          disabled={this.state.logs.length <= index + LOG_COUNT}
+          onPress={this.showOlderLog}
+        >
+          <Text style={Styles.text}>
+            {"▶︎"}
+          </Text>
+        </TouchableHighlight>
+      </View>
+
       <FlatList
         data={this.state.logs.slice(index, index + LOG_COUNT)}
         keyExtractor={item => item.id.toString()}
@@ -76,25 +95,6 @@ class LogScreen extends Component {
           );
         }}
       />
-
-      <View style={Styles.row}>
-        <TouchableHighlight
-          disabled={index <= 0}
-          onPress={this.showNewerLog}
-        >
-          <Text style={Styles.buttonText}>
-            {"◀︎"}
-          </Text>
-        </TouchableHighlight>
-        <TouchableHighlight
-          disabled={this.state.logs.length <= index + LOG_COUNT}
-          onPress={this.showOlderLog}
-        >
-          <Text style={Styles.buttonText}>
-            {"▶︎"}
-          </Text>
-        </TouchableHighlight>
-      </View>
     </View>);
   }
 
