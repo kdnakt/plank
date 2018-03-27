@@ -139,6 +139,10 @@ android {
 dependencies {
     compile project(':realm')
     compile project(':react-native-vector-icons')
+    compile project(':react-native-push-notification')
+    compile project(':react-native-background-timer')
+    compile project(':realm')
+    compile project(':react-native-vector-icons')
     compile project(':react-native-vector-icons')
     compile project(':react-native-background-timer')
     compile project(':react-native-vector-icons')
