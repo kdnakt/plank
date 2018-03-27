@@ -31,7 +31,7 @@ class ConfigScreen extends Component {
 
   componentWillMount() {
     Realm.open(Schema).then(realm => {
-      const times = realm.objects('TargetTime');
+      const times = realm.objects(TargetTime.name);
       if (times.length > 0) {
         this.setState({
           targetTime: times[0].seconds,
