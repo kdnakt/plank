@@ -20,6 +20,8 @@ import {
   formatTime,
   formatDate,
 } from './util/Utils';
+import PushNotification from 'react-native-push-notification';
+import NativeEventEmitter from 'NativeEventEmitter';
 
 class TimerScreen extends Component {
 
@@ -75,6 +77,10 @@ class TimerScreen extends Component {
     this.props.navigation.addListener('willFocus', () => {
       this.updateTargetTime();
       this.resetStopwatch();
+    });
+    PushNotification.localNotificationSchedule({
+      message: "My Notification Message", // (required)
+      date: new Date(Date.now() + (60 * 1000)) // in 60 secs
     });
   }
 
