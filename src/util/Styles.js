@@ -27,7 +27,10 @@ const Styles = StyleSheet.create({
     flex: 0.5,
     flexDirection: 'row',
     justifyContent: 'space-between',
-  }
+  },
+  configContainer: {
+    width: 150,
+  },
 });
 
 export default Styles;
