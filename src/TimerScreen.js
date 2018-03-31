@@ -21,6 +21,7 @@ import {
   formatDate,
 } from './util/Utils';
 import PushNotification from 'react-native-push-notification';
+import PushNotificationIOS from 'react-native-push-notification'
 import NativeEventEmitter from 'NativeEventEmitter';
 
 class TimerScreen extends Component {
@@ -78,9 +79,22 @@ class TimerScreen extends Component {
       this.updateTargetTime();
       this.resetStopwatch();
     });
-    PushNotification.localNotificationSchedule({
+    PushNotification.configure({
+      onNotification: function(notification) {
+        console.log('NOTIFICATION:', notification);
+        notification.finish(PushNotificationIOS.FetchResult.NoData);
+      },
+
+      permissions: {
+        alert: true,
+        badge: true,
+        sound: true,
+      },
+    });
+    PushNotification.localNotification({
+      title: "My Notification Title",
       message: "My Notification Message", // (required)
-      date: new Date(Date.now() + (60 * 1000)) // in 60 secs
+      //date: new Date(Date.now() + (5 * 1000)) // in 5 secs
     });
   }
 
@@ -119,7 +133,7 @@ class TimerScreen extends Component {
             date: formatDate(date),
             seconds: time,
           });
-          console.log(realm.objects(PlankLog.name));
+          //console.log(realm.objects(PlankLog.name));
         });
       });
       alert(`Finished ${formatTime(time)} plank!`);
