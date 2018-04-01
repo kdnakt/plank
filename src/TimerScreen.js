@@ -82,7 +82,7 @@ class TimerScreen extends Component {
     PushNotification.configure({
       onNotification: function(notification) {
         console.log('NOTIFICATION:', notification);
-        notification.finish(PushNotificationIOS.FetchResult.NoData);
+        //notification.finish(PushNotificationIOS.FetchResult.NoData);
       },
 
       permissions: {
