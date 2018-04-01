@@ -21,7 +21,7 @@ import {
   formatDate,
 } from './util/Utils';
 import PushNotification from 'react-native-push-notification';
-import PushNotificationIOS from 'react-native-push-notification'
+//import PushNotificationIOS from 'react-native-push-notification'
 import NativeEventEmitter from 'NativeEventEmitter';
 
 class TimerScreen extends Component {
