@@ -7,7 +7,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import ReactNativeBgTimer from 'react-native-background-timer';
-import * as Progress from 'react-native-progress';
+import ProgressPie from 'react-native-progress/Pie';
 //import Icon from 'react-native-vector-icons/FontAwesome';
 import Realm from 'realm';
 import {
@@ -190,7 +190,7 @@ class TimerScreen extends Component {
           </Text>
         </TouchableHighlight>
 
-        <Progress.Pie
+        <ProgressPie
           progress={timeCount / targetTime}
           size={150}
         />

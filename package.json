@@ -28,7 +28,7 @@
   "jest": {
     "preset": "react-native",
     "transformIgnorePatterns": [
-      "node_modules/(?!(react-native|react-navigation|react-native-safe-area-view)/)"
+      "node_modules/(?!(react-native|react-navigation|react-native-safe-area-view|react-native-progress)/)"
     ]
   }
 }
