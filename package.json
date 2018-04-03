@@ -20,12 +20,15 @@
     "rmc-input-number": "^1.0.4"
   },
   "devDependencies": {
-    "babel-jest": "22.1.0",
-    "babel-preset-react-native": "4.0.0",
+    "babel-jest": "^22.1.0",
+    "babel-preset-react-native": "^4.0.0",
     "jest": "22.1.4",
     "react-test-renderer": "16.2.0"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(react-native|react-navigation|react-native-safe-area-view)/)"
+    ]
   }
 }

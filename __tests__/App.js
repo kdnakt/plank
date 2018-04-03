@@ -9,4 +9,41 @@ it('renders correctly', () => {
   const tree = renderer.create(
     <App />
   );
+  expect(filterKeys(tree.toJSON())).toMatchSnapshot();
 });
+
+// keys are date and order-of-test based, so just removed them
+const filterKeys = (json) => {
+  return json;
+  if (json.children) {
+    json.children.map(child => filterKeys(child))
+  }
+  if (json.props
+    && json.props.navigation
+    && json.props.navigation.state
+    && json.props.navigation.state.routes) {
+    const state = json.props.navigation.state;
+    json.props.navigation.state = {
+      ...state,
+      routes: state.routes.map((route) => {
+        const { key, ...others } = route
+        return filterKeys(others)
+      }),
+    }
+  }
+  return json;
+};
+
+jest.mock('react-native-background-timer', () => ({
+}));
+jest.mock('react-native-progress', () => ({
+}));
+jest.mock('react-native-push-notification', () => ({
+  configure: jest.fn(),
+  onRegister: jest.fn(),
+  onNotification: jest.fn(),
+  addEventListener: jest.fn(),
+  requestPermissions: jest.fn(),
+}));
+jest.mock('react-native-modal-datetime-picker', () => ({
+}));
