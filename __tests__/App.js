@@ -35,6 +35,7 @@ const filterKeys = (json) => {
 };
 
 jest.mock('react-native-background-timer', () => ({
+  stopBackgroundTimer: jest.fn(),
 }));
 jest.mock('react-native-progress', () => ({
 }));
