@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   Button,
+  PushNotificationIOS,
   Text,
   StyleSheet,
   View,
@@ -91,10 +92,10 @@ class TimerScreen extends Component {
         sound: true,
       },
     });
-    PushNotification.localNotification({
-      title: "My Notification Title",
-      message: "My Notification Message", // (required)
-      //date: new Date(Date.now() + (5 * 1000)) // in 5 secs
+    PushNotificationIOS.scheduleLocalNotification({
+      alertTitle: 'alertTitle',
+      alertBody: 'alertBody',
+      fireDate: new Date(Date.now() + 5 * 1000).toISOString(),
     });
   }
 
