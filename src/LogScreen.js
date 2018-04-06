@@ -23,7 +23,7 @@ import Styles from './util/Styles';
 
 const LOG_COUNT = 7;
 
-class LogScreen extends Component {
+class LogScreen extends Component<{}> {
 
   static navigationOptions = ({navigation}) => ({
     title: 'Plank Log',

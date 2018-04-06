@@ -15,7 +15,7 @@ import {
 } from './schema/Schema';
 import Styles from './util/Styles';
 
-class ConfigScreen extends Component {
+class ConfigScreen extends Component<{}> {
 
   static navigationOptions = ({navigation}) => ({
     title: 'Configuration',
