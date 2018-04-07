@@ -44,7 +44,7 @@ class TimerScreen extends Component<{}> {
       onPress={() => {
         navigation.navigate('Config');
       }}>
-        <Text>
+        <Text style={Styles.text}>
           {'Config'}
         </Text>
       </TouchableHighlight>),
