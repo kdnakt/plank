@@ -14,6 +14,7 @@ import {
   Schema,
 } from './schema/Schema';
 import Styles from './util/Styles';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 
 class ConfigScreen extends Component<{}> {
 
@@ -26,7 +27,12 @@ class ConfigScreen extends Component<{}> {
     this.state = {
       targetTime: 60,
       realm: null,
-    }
+      isTimePickerVisible: false,
+      reservedTime: 540,
+    };
+    this.showTimePicker = this.showTimePicker.bind(this);
+    this.hideTimePicker = this.hideTimePicker.bind(this);
+    this.handleTimePicked = this.handleTimePicked.bind(this);
   }
 
   componentWillMount() {
@@ -54,9 +60,47 @@ class ConfigScreen extends Component<{}> {
     })
   }
 
+  showTimePicker() {
+    this.setState({ isTimePickerVisible: true })
+  }
+
+  hideTimePicker() {
+    this.setState({ isTimePickerVisible: false })
+  }
+
+  handleTimePicked(date) {
+    const hour = date.getHours();
+    console.log(hour);
+    const minute = date.getMinutes();
+    console.log(minute);
+    this.hideTimePicker();
+  }
+
+  getTime() {
+    const time = new Date();
+    time.setHours(9);
+    time.setMinutes(0);
+    time.setSeconds(0);
+    time.setMilliseconds(0);
+    return time;
+  }
+
   render() {
     return (
       <View style={Styles.container}>
+
+         <TouchableHighlight onPress={this.showTimePicker}
+           //style={Styles.row}
+         >
+           <Text>
+             {"Set Alert Time"}
+           </Text>
+         </TouchableHighlight>
+
+         <Text>
+           {this.state.reservedTime}
+         </Text>
+
          <InputNumber
            min={0}
            max={300}
@@ -66,6 +110,15 @@ class ConfigScreen extends Component<{}> {
            value={this.state.targetTime}
            styles={InputNumberStyles}
            style={Styles.configContainer}
+         />
+
+         <DateTimePicker
+           mode="time"
+           date={this.getTime()}
+           format={"HH:mm"}
+           isVisible={this.state.isTimePickerVisible}
+           onConfirm={this.handleTimePicked}
+           onCancel={this.hideTimePicker}
          />
       </View>
     );
