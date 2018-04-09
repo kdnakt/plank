@@ -119,6 +119,7 @@ class ConfigScreen extends Component<{}> {
            isVisible={this.state.isTimePickerVisible}
            onConfirm={this.handleTimePicked}
            onCancel={this.hideTimePicker}
+           titleIOS={"Pick a time"}
          />
       </View>
     );
