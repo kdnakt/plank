@@ -74,6 +74,9 @@ class TimerScreen extends Component<{}> {
           realm.create(TargetTime.name, {
             id: TargetTime.name,
             seconds: 30,
+            notifHours: 0,
+            notifMinutes: 0,
+            useNotif: false,
           });
         });
       }

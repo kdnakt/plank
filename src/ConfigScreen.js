@@ -26,6 +26,9 @@ class ConfigScreen extends Component<{}> {
     super();
     this.state = {
       targetTime: 60,
+      notifHours: 0,
+      notifMinutes: 0,
+      useNotif: false,
       realm: null,
       isTimePickerVisible: false,
       reservedTime: 540,
@@ -33,6 +36,7 @@ class ConfigScreen extends Component<{}> {
     this.showTimePicker = this.showTimePicker.bind(this);
     this.hideTimePicker = this.hideTimePicker.bind(this);
     this.handleTimePicked = this.handleTimePicked.bind(this);
+    this.getTime = this.getTime.bind(this);
   }
 
   componentWillMount() {
@@ -41,23 +45,32 @@ class ConfigScreen extends Component<{}> {
       if (times.length > 0) {
         this.setState({
           targetTime: times[0].seconds,
+          notifHours: times[0].notifHours,
+          notifMinutes: times[0].notifMinutes,
+          useNotif: times[0].useNotif,
           realm: realm,
         });
       }
     })
   }
 
-  save(text) {
+  save(seconds, notifHours, notifMinutes, useNotif) {
     const realm = this.state.realm;
     realm.write(() => {
       realm.create(TargetTime.name, {
         id: TargetTime.name,
-        seconds: text,
+        seconds: seconds,
+        notifHours: notifHours,
+        notifMinutes: notifMinutes,
+        useNotif: useNotif,
       }, true);
     });
     this.setState({
-      targetTime: text,
-    })
+      targetTime: seconds,
+      notifHours: notifHours,
+      notifMinutes: notifMinutes,
+      useNotif: useNotif,
+    });
   }
 
   showTimePicker() {
@@ -70,16 +83,16 @@ class ConfigScreen extends Component<{}> {
 
   handleTimePicked(date) {
     const hour = date.getHours();
-    console.log(hour);
     const minute = date.getMinutes();
-    console.log(minute);
+    const s = this.state;
+    this.save(s.targetTime, hour, minute, s.useNotif)
     this.hideTimePicker();
   }
 
   getTime() {
     const time = new Date();
-    time.setHours(9);
-    time.setMinutes(0);
+    time.setHours(this.state.notifHours);
+    time.setMinutes(this.state.notifMinutes);
     time.setSeconds(0);
     time.setMilliseconds(0);
     return time;
@@ -105,7 +118,8 @@ class ConfigScreen extends Component<{}> {
            min={0}
            max={300}
            onChange={(text) => {
-             this.save(text);
+             const s = this.state;
+             this.save(text, s.notifHours, s.notifSeconds, s.useNotif);
            }}
            value={this.state.targetTime}
            styles={InputNumberStyles}
