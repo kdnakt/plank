@@ -139,7 +139,6 @@ class TimerScreen extends Component<{}> {
             date: formatDate(date),
             seconds: time,
           });
-          //console.log(realm.objects(PlankLog.name));
         });
       });
       alert(`Finished ${formatTime(time)} plank!`);
