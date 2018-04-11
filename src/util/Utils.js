@@ -28,4 +28,5 @@ export {
   formatDate,
   formatDateTime,
   formatTime,
+  zeroPad,
 };

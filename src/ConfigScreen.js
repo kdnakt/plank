@@ -14,6 +14,9 @@ import {
   Schema,
 } from './schema/Schema';
 import Styles from './util/Styles';
+import {
+  zeroPad,
+} from './util/Utils';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 
 class ConfigScreen extends Component<{}> {
@@ -31,12 +34,12 @@ class ConfigScreen extends Component<{}> {
       useNotif: false,
       realm: null,
       isTimePickerVisible: false,
-      reservedTime: 540,
     };
     this.showTimePicker = this.showTimePicker.bind(this);
     this.hideTimePicker = this.hideTimePicker.bind(this);
     this.handleTimePicked = this.handleTimePicked.bind(this);
     this.getTime = this.getTime.bind(this);
+    this.getAlertTime = this.getAlertTime.bind(this);
   }
 
   componentWillMount() {
@@ -98,6 +101,11 @@ class ConfigScreen extends Component<{}> {
     return time;
   }
 
+  getAlertTime() {
+    return zeroPad(this.state.notifHours)
+      + ':' + zeroPad(this.state.notifMinutes)
+  }
+
   render() {
     return (
       <View style={Styles.container}>
@@ -111,7 +119,7 @@ class ConfigScreen extends Component<{}> {
          </TouchableHighlight>
 
          <Text>
-           {this.state.reservedTime}
+           {this.getAlertTime()}
          </Text>
 
          <InputNumber
