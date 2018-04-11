@@ -127,7 +127,7 @@ class ConfigScreen extends Component<{}> {
            max={300}
            onChange={(text) => {
              const s = this.state;
-             this.save(text, s.notifHours, s.notifSeconds, s.useNotif);
+             this.save(text, s.notifHours, s.notifMinutes, s.useNotif);
            }}
            value={this.state.targetTime}
            styles={InputNumberStyles}
