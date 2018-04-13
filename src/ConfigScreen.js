@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  PushNotificationIOS,
   Text,
   TextInput,
   StyleSheet,
@@ -18,6 +19,7 @@ import {
   zeroPad,
 } from './util/Utils';
 import DateTimePicker from 'react-native-modal-datetime-picker';
+import PushNotification from 'react-native-push-notification';
 
 class ConfigScreen extends Component<{}> {
 
@@ -90,6 +92,29 @@ class ConfigScreen extends Component<{}> {
     const s = this.state;
     this.save(s.targetTime, hour, minute, s.useNotif)
     this.hideTimePicker();
+    this.setNotification();
+  }
+
+  setNotification() {
+    PushNotification.configure({
+      onNotification: function(notification) {
+        console.log('NOTIFICATION:', notification);
+        if (notification.foreground) {
+          //alert(notification.message);
+        }
+      },
+
+      permissions: {
+        alert: true,
+        badge: true,
+        sound: true,
+      },
+    });
+    PushNotificationIOS.scheduleLocalNotification({
+      alertTitle: 'alertTitle',
+      alertBody: 'alertBody',
+      fireDate: new Date(Date.now() + 5 * 1000).toISOString(),
+    });
   }
 
   getTime() {

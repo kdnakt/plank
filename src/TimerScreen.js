@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 import {
   Button,
-  PushNotificationIOS,
   Text,
   StyleSheet,
   View,
@@ -23,9 +22,6 @@ import {
   formatTime,
   formatDate,
 } from './util/Utils';
-import PushNotification from 'react-native-push-notification';
-//import PushNotificationIOS from 'react-native-push-notification'
-import NativeEventEmitter from 'NativeEventEmitter';
 
 class TimerScreen extends Component<{}> {
 
@@ -84,23 +80,6 @@ class TimerScreen extends Component<{}> {
     this.props.navigation.addListener('willFocus', () => {
       this.updateTargetTime();
       this.resetStopwatch();
-    });
-    PushNotification.configure({
-      onNotification: function(notification) {
-        console.log('NOTIFICATION:', notification);
-        //notification.finish(PushNotificationIOS.FetchResult.NoData);
-      },
-
-      permissions: {
-        alert: true,
-        badge: true,
-        sound: true,
-      },
-    });
-    PushNotificationIOS.scheduleLocalNotification({
-      alertTitle: 'alertTitle',
-      alertBody: 'alertBody',
-      fireDate: new Date(Date.now() + 5 * 1000).toISOString(),
     });
   }
 
