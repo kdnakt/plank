@@ -92,10 +92,10 @@ class ConfigScreen extends Component<{}> {
     const s = this.state;
     this.save(s.targetTime, hour, minute, s.useNotif)
     this.hideTimePicker();
-    this.setNotification();
+    this.setNotification(hour, minute);
   }
 
-  setNotification() {
+  setNotification(hour, minute) {
     PushNotification.configure({
       onNotification: function(notification) {
         console.log('NOTIFICATION:', notification);
@@ -110,17 +110,23 @@ class ConfigScreen extends Component<{}> {
         sound: true,
       },
     });
+    const time = new Date();
+    const notifTime = this.getTime(hour, mimute);
+    if (time > notifTime) {
+      notifTime.setDate(notifTime.getDate() + 1);
+    }
+
     PushNotificationIOS.scheduleLocalNotification({
       alertTitle: 'alertTitle',
       alertBody: 'alertBody',
-      fireDate: new Date(Date.now() + 5 * 1000).toISOString(),
+      fireDate: notifTime.toISOString(),
     });
   }
 
-  getTime() {
+  getTime(hour, minute) {
     const time = new Date();
-    time.setHours(this.state.notifHours);
-    time.setMinutes(this.state.notifMinutes);
+    time.setHours(hour ? hour : this.state.notifHours);
+    time.setMinutes(minute ? minute : this.state.notifMinutes);
     time.setSeconds(0);
     time.setMilliseconds(0);
     return time;
