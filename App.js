@@ -5,11 +5,15 @@
 import React from 'react';
 
 import { StackNavigator } from 'react-navigation';
+import MainScreen from './src/MainScreen';
 import TimerScreen from './src/TimerScreen';
 import ConfigScreen from './src/ConfigScreen';
 import LogScreen from './src/LogScreen';
 
 const routes = {
+  Main: {
+    screen: MainScreen,
+  },
   Timer: {
     screen: TimerScreen,
   },
