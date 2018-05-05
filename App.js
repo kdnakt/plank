@@ -26,7 +26,7 @@ const routes = {
 };
 
 const config = {
-  initialRouteName: 'Timer',
+  initialRouteName: 'Main',
 };
 
 const App = StackNavigator(routes, config);

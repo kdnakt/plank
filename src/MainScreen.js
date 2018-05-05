@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Button,
   Text,
   View,
 } from 'react-native';
@@ -20,7 +21,8 @@ class MainScreen extends Component<{}> {
     super();
     this.state = {
       bestRecord: null,
-    }
+    };
+    this.navigate = this.navigate.bind(this);
   }
 
   componentWillMount() {
@@ -34,6 +36,10 @@ class MainScreen extends Component<{}> {
     });
   }
 
+  navigate(key) {
+    this.props.navigation.navigate(key);
+  }
+
   render() {
     const bestRecord = this.state.bestRecord;
     return (
@@ -44,6 +50,18 @@ class MainScreen extends Component<{}> {
         <Text>
           {bestRecord ? `Best Record: ${bestRecord} seconds` : null}
         </Text>
+        <Button
+          title={"Timer"}
+          onPress={() => this.navigate("Timer")}
+        />
+        <Button
+          title={"Log"}
+          onPress={() => this.navigate("Log")}
+        />
+        <Button
+          title={"Config"}
+          onPress={() => this.navigate("Config")}
+        />
       </View>
     )
   }
