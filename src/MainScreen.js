@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   Button,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import Realm from 'realm';
@@ -23,6 +24,7 @@ class MainScreen extends Component<{}> {
       bestRecord: null,
     };
     this.navigate = this.navigate.bind(this);
+    this.renderButton = this.renderButton.bind(this);
   }
 
   componentWillMount() {
@@ -40,6 +42,17 @@ class MainScreen extends Component<{}> {
     this.props.navigation.navigate(key);
   }
 
+  renderButton(key) {
+    return (
+      <TouchableOpacity
+        style={Styles.mainButton}
+        onPress={() => this.navigate(key)}
+      >
+        <Text>{key}</Text>
+      </TouchableOpacity>
+    );
+  }
+
   render() {
     const bestRecord = this.state.bestRecord;
     return (
@@ -50,18 +63,10 @@ class MainScreen extends Component<{}> {
         <Text>
           {bestRecord ? `Best Record: ${bestRecord} seconds` : null}
         </Text>
-        <Button
-          title={"Timer"}
-          onPress={() => this.navigate("Timer")}
-        />
-        <Button
-          title={"Log"}
-          onPress={() => this.navigate("Log")}
-        />
-        <Button
-          title={"Config"}
-          onPress={() => this.navigate("Config")}
-        />
+
+        {this.renderButton("Timer")}
+        {this.renderButton("Log")}
+        {this.renderButton("Config")}
       </View>
     )
   }

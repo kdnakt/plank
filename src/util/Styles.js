@@ -31,6 +31,13 @@ const Styles = StyleSheet.create({
   configContainer: {
     width: 150,
   },
+  mainButton: {
+    alignItems: 'center',
+    backgroundColor: '#DDDDDD',
+    padding: 10,
+    margin: 2,
+    width: '90%',
+  },
 });
 
 export default Styles;
