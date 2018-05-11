@@ -38,6 +38,9 @@ const Styles = StyleSheet.create({
     margin: 2,
     width: '90%',
   },
+  mainTitle: {
+    fontSize: 50,
+  },
 });
 
 export default Styles;

@@ -56,8 +56,8 @@ class MainScreen extends Component<{}> {
     const bestRecord = this.state.bestRecord;
     return (
       <View style={Styles.container}>
-        <Text>
-          {"Main Screen"}
+        <Text style={Styles.mainTitle}>
+          {"Let's Get Fit!"}
         </Text>
         <Text>
           {bestRecord ? `Best Record: ${bestRecord} seconds` : null}
